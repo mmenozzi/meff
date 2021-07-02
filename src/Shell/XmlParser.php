@@ -323,12 +323,9 @@ class XmlParser extends ExtensionXml
                 continue;
             }
 
-            if ($layout_node == 'frontend') {
-                $xml_dir = 'app/design/frontend';
-            } else {
-                if ($layout_node == 'adminhtml') {
-                    $xml_dir = 'app/design/adminhtml';
-                }
+            $xml_dir = 'app/design/frontend';
+            if ($layout_node == 'adminhtml') {
+                $xml_dir = 'app/design/adminhtml';
             }
 
             $this->debugOut(
@@ -399,6 +396,7 @@ class XmlParser extends ExtensionXml
             'skin',
         );
 
+        $data = [];
         // loop through each main folder type (frontend, adminhtml)
         foreach (self::$root_nodes as $node) {
 
@@ -641,9 +639,7 @@ class XmlParser extends ExtensionXml
                         $line
                     );
 
-                    if (isset($potential_filename_match) &&
-                        !empty($potential_filename_match)
-                    ) {
+                    if (!empty($potential_filename_match)) {
                         $data[] = $potential_filename_match;
                     }
 
@@ -774,7 +770,7 @@ class XmlParser extends ExtensionXml
      *
      * @param array $ext (file extensions)
      * @param string $line
-     * @return string
+     * @return array
      */
     public function parseFilenameFromLine($exts, $line)
     {
