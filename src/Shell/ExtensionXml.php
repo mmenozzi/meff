@@ -28,10 +28,8 @@ class ExtensionXml extends Meff
 
     /**
      * Load the Magento extensions app/etc/module/*.xml file
-     *
-     * @return string
      */
-    private function loadModuleXml()
+    private function loadModuleXml(): void
     {
 
         // load in config.xml to simplexml parser

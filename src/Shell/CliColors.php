@@ -61,10 +61,8 @@ class CliColors
 
     /**
      * Write text to console
-     *
-     * @return string
      */
-    public function write($msg_type = null, $msg = null, $extra_msg = null)
+    public function write($msg_type = null, $msg = null, $extra_msg = null): void
     {
 
         $str = '';
@@ -91,6 +89,5 @@ class CliColors
         }
 
         echo $str . PHP_EOL;
-
     }
 }

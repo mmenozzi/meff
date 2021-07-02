@@ -33,9 +33,8 @@ class XmlParser extends ExtensionXml
     /**
      * Retrieves node specific data
      *
-     * @param string $xml (path to extensions config.xml file)
-     * @param array $root_nodes (global, frontend, adminhtml)
-     * @param array $node_type (layout, translate, template)
+     * @param string $root_node (global, frontend, adminhtml)
+     * @param string $node_type (layout, translate, template)
      * @return array
      */
     function getXmlNode($root_node, $node_type)
@@ -90,7 +89,6 @@ class XmlParser extends ExtensionXml
     /**
      * Loop through the
      *
-     * @param string $xml (path to extensions config.xml file)
      * @return array
      */
     function getFilesFromXml()
@@ -668,7 +666,7 @@ class XmlParser extends ExtensionXml
      * to attempt to try to to find files that are in
      * Magento's /lib directory
      *
-     * @param string $line
+     * @param array $file_list
      * @return string
      */
     public function parseSourceForLibs($file_list)
@@ -768,7 +766,7 @@ class XmlParser extends ExtensionXml
      * the most acurate way to search for filenames in code and may be
      * revisted in the future
      *
-     * @param array $ext (file extensions)
+     * @param array $exts (file extensions)
      * @param string $line
      * @return array
      */

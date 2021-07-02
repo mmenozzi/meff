@@ -164,7 +164,8 @@ class Meff
     {
         $cli_txt = new CliColors();
         if (self::DISPLAY_CLI_ERRORS) {
-            die($cli_txt->write('ERROR', $error_string));
+            $cli_txt->write('ERROR', $error_string);
+            exit(1);
         }
     }
 
