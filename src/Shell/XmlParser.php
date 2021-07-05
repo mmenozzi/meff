@@ -788,7 +788,8 @@ class XmlParser extends ExtensionXml
                     $t = str_replace(';', "", $t);
                     $t = str_replace(')', "", $t);
                     $t = str_replace('(', "", $t);
-                    $t = array_pop(explode("'", $t)) . $e;
+                    $explode = explode("'", $t);
+                    $t = array_pop($explode) . $e;
                     $t = trim($t);
 
                     if (empty($t)) {
