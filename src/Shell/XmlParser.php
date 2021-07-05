@@ -119,7 +119,7 @@ class XmlParser extends ExtensionXml
     /**
      * Get that Magento layout xml files
      *
-     * @param string $main_node (global, frontend, adminhtml)
+     * @param \SimpleXMLElement $main_node (global, frontend, adminhtml)
      * @return array
      */
     function getLayoutFiles($main_node)
@@ -160,7 +160,7 @@ class XmlParser extends ExtensionXml
     /**
      * Get that Magento translate csvs
      *
-     * @param string $main_node (global, frontend, adminhtml)
+     * @param \SimpleXMLElement $main_node (global, frontend, adminhtml)
      * @return array
      */
     function getTranslateFiles($main_node)
@@ -202,7 +202,7 @@ class XmlParser extends ExtensionXml
     /**
      * Get that Magento transactional email templates
      *
-     * @param string $main_node (global, frontend, adminhtml)
+     * @param \SimpleXMLElement $main_node (global, frontend, adminhtml)
      * @return array
      */
     function getEmailTemplates($main_node)
@@ -667,7 +667,7 @@ class XmlParser extends ExtensionXml
      * Magento's /lib directory
      *
      * @param array $file_list
-     * @return string
+     * @return array
      */
     public function parseSourceForLibs($file_list)
     {
