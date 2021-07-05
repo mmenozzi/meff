@@ -9,5 +9,8 @@
     },
     "require": {
         "ext-simplexml": "*"
-    }
+    },
+    "bin": [
+        "meff"
+    ]
 }
