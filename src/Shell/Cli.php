@@ -22,7 +22,7 @@ class Cli extends Meff
     {
 
         // grab the command line paramters
-        $this->params = $argv;
+        self::$params = $argv;
 
         // perform some basic checks
         $this->isExtensionNameProvided();
@@ -43,7 +43,7 @@ class Cli extends Meff
     private function isExtensionNameProvided()
     {
 
-        if (!isset($this->params[1])) {
+        if (!isset(self::$params[1])) {
             $this->displayError('Extension name not given.');
         }
 
@@ -65,9 +65,9 @@ class Cli extends Meff
     private function isMagentoDirectoryProvided()
     {
 
-        if (!isset($this->params[2])) {
+        if (!isset(self::$params[2])) {
             // try to use the current working directory if a dir is not passed
-            $this->params[2] = getcwd();
+            self::$params[2] = getcwd();
         }
 
     }
@@ -78,7 +78,7 @@ class Cli extends Meff
     private function isExtensionNameFormatedCorrectly()
     {
 
-        $extension = $this->params[1];
+        $extension = self::$params[1];
 
         if (strpos($extension, '_') === false) {
             $this->displayError('Extension format wrong.');
@@ -94,7 +94,7 @@ class Cli extends Meff
     public function getExtensionFullName()
     {
 
-        $extension = $this->params[1];
+        $extension = self::$params[1];
 
         // ensure that the first letter is capitalized for Magento standards
         $tmp = explode('_', $extension);
@@ -113,10 +113,10 @@ class Cli extends Meff
     public function getMagentoDir()
     {
 
-        if ($this->params[2] == '.') {
+        if (self::$params[2] == '.') {
             $magento_dir = getcwd();
         } else {
-            $magento_dir = $this->params[2];
+            $magento_dir = self::$params[2];
         }
         // remove trailing slash
         $magento_dir = rtrim($magento_dir, '/');
