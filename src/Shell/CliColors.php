@@ -17,8 +17,11 @@ class CliColors
     // set this to false to not use colors
     const USE_COLOR = true;
 
+    private $use_color;
+
     public function __construct()
     {
+        $this->use_color = self::USE_COLOR;
 
         // Credit to JR: http://goo.gl/BE373
 
@@ -41,7 +44,7 @@ class CliColors
     public function formatTxt($string, $f_color = null)
     {
 
-        if (self::USE_COLOR) {
+        if ($this->use_color) {
 
             $color_string = '';
 

@@ -42,6 +42,9 @@ class Meff
     // @SimpleXMLElement app/code_pool/company_name/extension_name
     protected static $extension_config_xml;
 
+    private $display_cli_errors;
+    private $debug_mode;
+
     /**
      * Instantiate all variables, class instances, and do the work
      *
@@ -51,6 +54,9 @@ class Meff
     {
 
         self::$params = $argv;
+
+        $this->display_cli_errors = self::DISPLAY_CLI_ERRORS;
+        $this->debug_mode = self::DEBUG_MODE;
 
         $cli_txt = new CliColors();
         $cli = new Cli(self::$params);
@@ -163,7 +169,7 @@ class Meff
     public function displayError($error_string)
     {
         $cli_txt = new CliColors();
-        if (self::DISPLAY_CLI_ERRORS) {
+        if ($this->display_cli_errors) {
             $cli_txt->write('ERROR', $error_string);
             exit(1);
         }
@@ -177,7 +183,7 @@ class Meff
         $level = 1
     ) {
 
-        if (self::DEBUG_MODE) {
+        if ($this->debug_mode) {
 
             $cli_txt = new CliColors();
 
