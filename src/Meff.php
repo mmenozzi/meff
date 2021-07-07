@@ -118,28 +118,33 @@ class Meff
 
         $cli_txt->write('FILES IDENTIFIED FOR', self::$extension_full_name);
 
-        echo self::$extension_base_dir . PHP_EOL;
-        echo self::$app_etc_module_path . PHP_EOL;
+        $results = [];
+        $results[] = self::$extension_base_dir;
+        $results[] = self::$app_etc_module_path;
 
         foreach ($config_xml_file_paths as $f_paths) {
             foreach ($f_paths as $p) {
-                echo $p . PHP_EOL;
+                $results[] = $p;
             }
         }
 
         foreach ($layout_xml_file_paths as $f_paths) {
             foreach ($f_paths as $p) {
-                echo $p . PHP_EOL;
+                $results[] = $p;
             }
         }
 
         foreach ($file_mentions_file_paths as $p) {
-            echo $p . PHP_EOL;
+            $results[] = $p;
         }
 
         foreach ($lib_mentions as $p) {
-            echo $p . PHP_EOL;
+            $results[] = $p;
         }
+
+        $results = array_unique($results);
+        sort($results);
+        echo implode(PHP_EOL, $results) . PHP_EOL;
 
     }
 
