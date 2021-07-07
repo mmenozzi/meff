@@ -28,6 +28,16 @@ class XmlParser extends ExtensionXml
         'template'
     );
 
+    public static $core_themes = [
+        'base/default',
+        'default/default',
+        'default/blank',
+        'default/iphone',
+        'default/modern',
+        'default/openmage',
+        'rwd/default',
+    ];
+
     public $likely_match = array();
 
     /**
@@ -362,12 +372,23 @@ class XmlParser extends ExtensionXml
                     to that file.
                 */
 
-                $layout_xml_files[$layout_node] = $file_iterator->iterateFileSystem(
-                    array('#^' . $xml_file . '$#'),
-                    self::$magento_dir . '/' . $xml_dir,
-                    true,
-                    $folder_match
-                );
+                $layout_files = [];
+                foreach (self::$core_themes as $core_theme) {
+                    $search_directory = self::$magento_dir . '/' . $xml_dir . '/' . $core_theme;
+                    if (!is_dir($search_directory)) {
+                        continue;
+                    }
+                    $layout_files = array_merge(
+                        $layout_files,
+                        $file_iterator->iterateFileSystem(
+                            array('#^' . $xml_file . '$#'),
+                            $search_directory,
+                            true,
+                            $folder_match
+                        )
+                    );
+                }
+                $layout_xml_files[$layout_node] = $layout_files;
 
             }
 
@@ -424,12 +445,18 @@ class XmlParser extends ExtensionXml
                         // get relative directory with full path
                         $tmp = str_replace($directory, '', $item->getPath());
 
+
                         // explode on directory seperator
                         $tmp = explode('/', $tmp);
 
                         // store the first two folders as a potential search location
                         if (isset($tmp[1]) && !empty($tmp[0])) {
-                            $data[] = $tmp[0] . '/' . $tmp[1];
+                            $str = $tmp[0] . '/' . $tmp[1];
+                            if (in_array($str, self::$core_themes, true)) {
+                                // We don't want files outside of core themes because they are not module-related files.
+                                // Instead they are customization of the module applied to current project.
+                                $data[] = $str;
+                            }
                         }
 
                     }
