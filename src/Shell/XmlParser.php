@@ -605,7 +605,7 @@ class XmlParser extends ExtensionXml
 
 
                     // loop through blocks
-                    $result = $xml->xpath('//block[not(node())]');
+                    $result = $xml->xpath('//block');
 
                     foreach ($result as $node) {
 
