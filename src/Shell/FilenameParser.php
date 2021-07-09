@@ -20,43 +20,14 @@ final class FilenameParser
      */
     public static function parseFromLine($exts, $line): array
     {
-        $data = [];
+        $exts = implode('|',  $exts);
+        $matches = [];
+        preg_match_all('/[\'"](.*?\.(?:'. $exts .'))[\'"]/', $line, $matches);
 
-        foreach ($exts as $e) {
-
-            if (strpos($line, $e) !== false) {
-
-                $tmp = explode($e, $line);
-
-                foreach ($tmp as $t) {
-                    $t = str_replace('"', "'", $t);
-                    $t = str_replace(';', "", $t);
-                    $t = str_replace(')', "", $t);
-                    $t = str_replace('(', "", $t);
-                    $explode = explode("'", $t);
-                    $t = array_pop($explode) . $e;
-                    $t = trim($t);
-
-                    if (empty($t)) {
-                        continue;
-                    }
-
-                    if ($t != $e) {
-
-                        // make sure the filename doesn't contain a space
-                        if (strpos($t, ' ') === false) {
-
-                            // make sure the filename does contains ending tag
-                            if (strpos($t, '/>') === false) {
-                                $data[] = $t;
-                            }
-                        }
-                    }
-                }
-            }
-
+        if (!array_key_exists(1, $matches)) {
+            return [];
         }
 
-        return $data;
+        return $matches[1];
     }
 }
