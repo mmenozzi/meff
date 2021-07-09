@@ -27,6 +27,7 @@ final class FilenameParserTest extends TestCase
             [['js'], '$this->setTemplate("template/path.phtml");', []],
             [['phtml'], 'template/path.phtml', []],
             [['phtml', 'php', 'js'], '["1.phtml", "2.php", "3.js", "4.css"];', ['1.phtml', '2.php', '3.js']],
+            [['.phtml'], '$this->setTemplate("template/path.phtml");', ['template/path.phtml']],
         ];
     }
 }

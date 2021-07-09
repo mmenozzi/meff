@@ -14,15 +14,23 @@ final class FilenameParser
      * the most acurate way to search for filenames in code and may be
      * revisted in the future
      *
-     * @param array $exts (file extensions)
+     * @param array $extensions File extensions with or without leading dot (e.g. ['.phtml', '.php', 'js', 'css'])
      * @param string $line
      * @return array
      */
-    public static function parseFromLine($exts, $line): array
+    public static function parseFromLine($extensions, $line): array
     {
-        $exts = implode('|',  $exts);
+        $extensions = implode(
+            '|',
+            array_map(
+                static function (string $extension) {
+                    return trim($extension, ". \t\n\r\0\x0B");
+                },
+                $extensions
+            )
+        );
         $matches = [];
-        preg_match_all('/[\'"](.*?\.(?:'. $exts .'))[\'"]/', $line, $matches);
+        preg_match_all('/[\'"](.*?\.(?:'. $extensions .'))[\'"]/', $line, $matches);
 
         if (!array_key_exists(1, $matches)) {
             return [];
