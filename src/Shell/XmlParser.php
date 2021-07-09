@@ -36,6 +36,9 @@ class XmlParser extends ExtensionXml
         'default/modern',
         'default/openmage',
         'rwd/default',
+        'rwd/enterprise',
+        'enterprise/default',
+        'enterprise/iphone',
     ];
 
     public $likely_match = array();
