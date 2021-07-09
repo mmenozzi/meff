@@ -3,11 +3,17 @@
     "description": "Utility to list all the files responsible for a Magento 1.x extension and their locations.",
     "license": ["MIT"],
     "require-dev": {
-        "phpstan/phpstan": "^0.12.90"
+        "phpstan/phpstan": "^0.12.90",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
             "Mmenozzi\\Meff\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mmenozzi\\Meff\\Test\\": "tests/"
         }
     },
     "require": {
