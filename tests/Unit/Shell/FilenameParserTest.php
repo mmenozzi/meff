@@ -28,6 +28,9 @@ final class FilenameParserTest extends TestCase
             [['phtml'], 'template/path.phtml', []],
             [['phtml', 'php', 'js'], '["1.phtml", "2.php", "3.js", "4.css"];', ['1.phtml', '2.php', '3.js']],
             [['.phtml'], '$this->setTemplate("template/path.phtml");', ['template/path.phtml']],
+            [['.php'], '$file .= DS . uc_words($controller, DS) . \'Controller.php\';', ['Controller.php']],
+            [['.php'], '$compilerConfig = $this->_getRootPath() . \'includes\' . DIRECTORY_SEPARATOR . \'config.php\';', ['config.php']],
+            [['.php'], '. implode(DIRECTORY_SEPARATOR, explode(\'_\', $className)) . \'.php\';', []],
         ];
     }
 }

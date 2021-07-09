@@ -30,7 +30,7 @@ final class FilenameParser
             )
         );
         $matches = [];
-        preg_match_all('/[\'"](.*?\.(?:'. $extensions .'))[\'"]/', $line, $matches);
+        preg_match_all('/[\'"]([^\'"]+\.(?:'. $extensions .'))[\'"]/', $line, $matches);
 
         if (!array_key_exists(1, $matches)) {
             return [];
