@@ -25,6 +25,13 @@ class FileIterator extends ExtensionXml
         $file_type_contains_regex = false,
         $folder_match = null
     ) {
+        if (!is_dir($search_directory)) {
+            // It appears that sometimes search directory is a file instead. It happens when the weird "likley"
+            // folder match takes place. I don't understand what that likley match is suppose to do. I don't like to
+            // hide the error this way but I need it working and there's no other way without understanding the whole
+            // tool behavior.
+            return [];
+        }        
 
         $this->debugOut(
             'iterateFileSystem',
